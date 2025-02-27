@@ -7,14 +7,14 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
-import axios from "axios";
 import { useRecoilState } from "recoil";
 import { printclientdata } from "../State/Atom";
+import axios from "axios";
 // import { Link } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
 
 export default function Client() {
-  let [formData, setFormData] = useRecoilState(printclientdata); //map client data
+  let [formData, setFormData] = useRecoilState(printclientdata); //map client data (Recoil use here)
   let [ButtonUpdate, setButtonUpdate] = useState(""); //for button text update
   let [editingIndex, setEditingIndex] = useState(-1); //for edit
 
@@ -58,45 +58,30 @@ export default function Client() {
     address: Yup.string().required("Address is Required"),
   });
 
-  // Get API
+  // get method
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/client")
-      .then((res) => {
-        console.log("Get api", res.data);
-        setFormData(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    let storeData = JSON.parse(localStorage.getItem("clientData")) || [];
+    setFormData(storeData)
   }, []);
 
   // On Submit Function
   const onSubmit = (values, { resetForm }) => {
     if (editingIndex !== -1) {
-      axios
-        .patch(
-          `http://localhost:3000/client/${formData[editingIndex].id}`,
-          values
-        )
-        .then((res) => {
-          const updatedData = [...formData];
-          updatedData[editingIndex] = values;
-          setFormData(updatedData);
-          setEditingIndex(-1);
-          setButtonUpdate("");
-          toast.success("Updated Successfully");
-        })
-        .catch((err) => {
-          console.log("patch api", err);
-        });
+      let storedData = JSON.parse(localStorage.getItem("clientData")) || [];
+      storedData[editingIndex] = values;
+      localStorage.setItem("clientData", JSON.stringify(storedData));
+      setFormData(storedData);
+      setEditingIndex(-1);
+      setButtonUpdate("");
+      toast.success("Updated Successfully");
     } else {
-      // setFormData([...formData, values]);
       toast.success("Added Successfully");
-      axios.post("http://localhost:3000/client", values).then((res) => {
-        // console.log("postData", res.data);
-        setFormData([...formData, res.data]);
-      });
+      // get method
+      let storeData = JSON.parse(localStorage.getItem("clientData")) || [];
+      // set method
+      let clientData = [...storeData, values];
+      setFormData(clientData);
+      localStorage.setItem("clientData", JSON.stringify(clientData));
     }
     resetForm();
   };
@@ -107,6 +92,7 @@ export default function Client() {
   };
 
   const handeldeletebtn = (index) => {
+    // console.log(index);
     Swal.fire({
       title: "Do you want to delete?",
       icon: "warning",
@@ -116,17 +102,10 @@ export default function Client() {
       reverseButtons: true,
     }).then((result) => {
       if (result.isConfirmed) {
-        axios
-          .delete(`http://localhost:3000/client/${formData[index].id}`)
-          .then((res) => {
-            // console.log(res.data);
-            const newdata = [...formData];
-            newdata.splice(index, 1);
-            setFormData(newdata);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+        let storedData = JSON.parse(localStorage.getItem("clientData")) || [];
+        storedData.splice(index, 1);
+        localStorage.setItem("clientData", JSON.stringify(storedData));
+        setFormData(storedData);
         toast.success("Deleted Successfully");
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         toast.error("Cancel Successfully");

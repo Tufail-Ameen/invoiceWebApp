@@ -20,7 +20,6 @@ import {
 } from "../State/Atom";
 import Dropdown from "react-bootstrap/Dropdown";
 import { Form } from "react-bootstrap";
-import axios from "axios";
 
 const Home = () => {
   const [id, setId] = useRecoilState(idsend);
@@ -28,49 +27,27 @@ const Home = () => {
   const [edit, setEdit] = useRecoilState(editatom);
   const [product, setProduct] = useRecoilState(productAtom);
   const [filterdata2, setFilterdata2] = useRecoilState(filterdatatom);
-  const [filterdata, setFilterdata] = useState([]);
 
   const handelFilter = (status) => {
+    console.log(status);
     const pendingData = product.filter((item) => item.btnCP === status);
-    setFilterdata(pendingData);
   };
 
   useEffect(() => {
-    setFilterdata(product);
-  }, [product]);
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:3000/POS")
-      .then((res) => {
-        // console.log(res.data);
-        setFilterdata(res.data);
-        setFilterdata2(res.data);
-        setProduct(res.data);
-      })
-      .catch((error) => {
-        // console.log(error);
-      });
-  }, []);
+    let storeData = JSON.parse(localStorage.getItem("invoiceData")) || [];
+    setProduct(storeData);
+  }, [])
 
   const openinvoice = () => {
-    // console.log("empty nai huwa = ", filterdata2);
     setFilterdata2([]);
     setNewInvoice1(true);
-
-    // setSlientcomponent(false);
-    // setHomapage(false);
   };
 
   const handeliconclick = (index) => {
     localStorage.setItem("Index", index);
-
     setEdit(true);
-
-    // setId([...id, randomId]);
-    // setProduct([...product, productObj]);
-    // console.log(product);
   };
+  
 
   return (
     <>
@@ -185,9 +162,8 @@ const Home = () => {
                 </div>
               </div>
             </div>
-
             {/* Row 1 */}
-            {filterdata.map((elem, index) => {
+            {product.map((elem, index) => {
               return (
                 <div
                   onClick={() => {
@@ -208,8 +184,8 @@ const Home = () => {
                     {elem.name}
                   </div>
                   <div className="col-md-2 position-table text-end price">
-                    {elem.currency}
-                    {elem.total.toFixed(2)}
+                    {elem.currency}&nbsp;
+                    {(elem.total ?? 0).toFixed(0)}
                   </div>
                   <div className="col-md-2 position-table-btn p-0">
                     {elem.btnCP == 1 ? (

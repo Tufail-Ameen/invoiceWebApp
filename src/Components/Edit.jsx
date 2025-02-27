@@ -13,7 +13,6 @@ import {
   productAtom,
 } from "../State/Atom";
 import Invoice from "./Invoice";
-import axios from "axios";
 
 export default function Edit() {
   const [goback, setGoback] = useRecoilState(gobackatom);
@@ -38,8 +37,7 @@ export default function Edit() {
     );
     setProduct(filteredProduct);
     setEdit(false);
-
-    axios.delete(`http://localhost:3000/POS/${filterdata[0].id}`);
+    localStorage.setItem("invoiceData" , JSON.stringify(filteredProduct));
   };
 
   const updatehandler = () => {
@@ -85,24 +83,15 @@ export default function Edit() {
     // console.log(RowPrint);
   };
 
-  const statuspaid = (statusvalue) => {
-    // const filtr = [...filterdata];
-    const filtr = JSON.parse(JSON.stringify(filterdata));
-    filtr[0].btnCP = 3;
-    console.log(filtr);
-
-    axios
-      .patch(`http://localhost:3000/POS/${filterdata[0].id}`, filtr[0])
-      .then((res) => {
-        console.log("patch", res.data);
-        let index = localStorage.getItem("Index");
-        const filtr = JSON.parse(JSON.stringify(product));
-        filtr[index].btnCP = 3;
-        setProduct(filtr);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const statuspaid = () => {
+    // get method
+    let index = localStorage.getItem("Index");
+    const arrayCopy = JSON.parse(JSON.stringify(product));
+    arrayCopy[index].btnCP = 3;
+    setProduct(arrayCopy);
+    // set method
+    localStorage.setItem("invoiceData", JSON.stringify(arrayCopy));
+    setEdit(false);
   };
 
   return (

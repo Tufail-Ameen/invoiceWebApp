@@ -14,11 +14,10 @@ import {
   productAtom,
 } from "../State/Atom";
 import { parse } from "date-fns";
-import axios from "axios";
 import { useEffect } from "react";
 
 export default function Invoice() {
-  const [data1, setData1] = useState([{ id: 0 }, { id: 1 }]); // Main Array ab APi sy kr dea issy
+  const [data1, setData1] = useState([{id:0}]);
   const [product, setProduct] = useRecoilState(productAtom);
   const [Invoice1, setNewInvoice1] = useRecoilState(formdisplay);
   const [id, setId] = useRecoilState(idsend);
@@ -26,7 +25,7 @@ export default function Invoice() {
   const [togglebtn, setTogglebtn] = useState(false);
   // const [RowPrint, setRowPrint] = useRecoilState(rowdata);
   const [editclick, setEditClick] = useRecoilState(editclicked);
-  let [formData, setFormData] = useRecoilState(printclientdata); //map client data
+  const [formData, setFormData] = useRecoilState(printclientdata); //map client data
   const [currentDate, setCurrentDate] = useState(new Date());
 
   // Get the formik context
@@ -54,29 +53,20 @@ export default function Invoice() {
 
   useEffect(() => {
     setCurrentDate(new Date());
-    axios
-      .get("http://localhost:3000/client")
-      .then((res) => {
-        console.log("Get api", res.data);
-        setFormData(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // localStorage.getItem("invoiceData");
   }, []);
 
   const clearrow = (index) => {
-    // console.log("formdata array", formData);
     const newData = [...data1];
     newData.splice(index, 1);
     setData1(newData);
   };
 
   const addnew = () => {
-    // alert("add");
     setData1([...data1, { id: data1.length }]);
   };
 
+  // Initial Values:
   const initialValues = {
     address1: "Ravi Road",
     city1: "Lahore",
@@ -89,10 +79,12 @@ export default function Invoice() {
     code2: "",
     country2: "",
     date: format(currentDate, "yyyy-MM-dd"),
-    datedue: "",
+    datedue: format(currentDate, "yyyy-MM-dd"),
+    // datedue: "",
     // payment: "",
-    description: "",
-    // currency: "",
+    description:
+      "Tufail Traders offers a wide range of premium cosmetic products to enhance your beauty and style.",
+    currency: "Rs",
     // item: "",
     // quantity: "",
     // tax: "",
@@ -100,6 +92,7 @@ export default function Invoice() {
     total: "",
   };
 
+  // Validations:
   const validationSchema = Yup.object({
     address1: Yup.string()
       .required("Street address is required")
@@ -151,14 +144,14 @@ export default function Invoice() {
     //   .min(new Date(), "Date cannot be in the past")
     //   .required("Date is required"),
 
-    datedue: Yup.date()
-      .min(Yup.ref("date"), "Due date must be after invoice date")
-      .required("Due date is required"),
+    // datedue: Yup.date()
+    //   .min(Yup.ref("date"), "Due date must be after invoice date")
+    //   .required("Due date is required"),
 
-    description: Yup.string()
-      .required("Description is required")
-      .min(5, "Description must be at least 5 characters")
-      .max(100, "Description must not exceed 100 characters"),
+    // description: Yup.string(),
+    // .required("Description is required")
+    // .min(5, "Description must be at least 5 characters")
+    // .max(100, "Description must not exceed 100 characters"),
 
     // item: Yup.string().required("Item Name is required"),
 
@@ -194,21 +187,6 @@ export default function Invoice() {
   };
 
   const onsubmit = (values) => {
-    // Convert date
-    // let date;
-
-    // if (values.date && !isNaN(Date.parse(values.date))) {
-    //   date = new Date(values.date);
-    // } else {
-    //   // Handle the case where the date is not valid
-    //   console.error("Invalid date format");
-    //   return;
-    // }
-    // let year = new Intl.DateTimeFormat("en", { year: "numeric" }).format(date);
-    // let month = new Intl.DateTimeFormat("en", { month: "short" }).format(date);
-    // let day = new Intl.DateTimeFormat("en", { day: "2-digit" }).format(date);
-    // values.date = "Due " + `${day} ${month} ${year}`;
-
     // Total Functionality
     let G_total = 0;
 
@@ -231,31 +209,21 @@ export default function Invoice() {
     let addupdate = parseInt(storedIndex, 10);
 
     if (editclick) {
-      // alert("1");
-      let updateinvoice = [product];
-      updateinvoice[storedIndex] = values;
-      // setRowPrint(values);
-      setProduct(updateinvoice);
+      // get method
+      let storedData = JSON.parse(localStorage.getItem("invoiceData")) || [];
+      storedData[storedIndex] = values;
+      // set method
+      localStorage.setItem("invoiceData", JSON.stringify(storedData));
+      setProduct(storedData);
       setEditClick(false);
-      axios
-        .patch(`http://localhost:3000/POS/${filterdata[0].id}`, values)
-        .then((res) => {
-          // console.log(res.data);
-        })
-        .catch((error) => {
-          // console.log(error);
-        });
     } else {
-      // alert("2");
-      setProduct([...product, values]);
-      axios
-        .post("http://localhost:3000/POS", values)
-        .then((res) => {
-          // console.log(res.data);
-        })
-        .catch((error) => {
-          // console.log(error);
-        });
+      console.log(values);
+      // get method
+      let storeData = JSON.parse(localStorage.getItem("invoiceData")) || [];
+      // set method
+      let InvoiceData = [...storeData, values];
+      setProduct(InvoiceData);
+      localStorage.setItem("invoiceData", JSON.stringify(InvoiceData));
     }
 
     setNewInvoice1(false);
@@ -469,9 +437,9 @@ export default function Invoice() {
                     />
 
                     <datalist id="clientNames">
-                      {formData.map((elem) => (
+                      {/* {formData.map((elem) => (
                         <option key={elem.id} value={elem.name} />
-                      ))}
+                      ))} */}
                     </datalist>
 
                     <ErrorMessage
@@ -635,12 +603,12 @@ export default function Invoice() {
                 </div>
               </div>
 
-              {/* Project Description */}
+              {/* Description */}
               <div className="row mx-2 mt-1">
                 <div className="col-md-12">
                   <div className="form-group">
                     <label htmlFor="description" className="input-clr mb-1">
-                      Project Description
+                      Description
                     </label>
                     <Field
                       type="text"
@@ -672,7 +640,7 @@ export default function Invoice() {
                     className="form-select input-settings downarrow"
                     aria-label="Default select example"
                   >
-                    <option>Rs</option>
+                    <option value="₹">Rs</option>
                     <option value="₹">₹</option>
                     <option value="₣">₣</option>
                     <option value="¥">¥</option>
@@ -796,7 +764,7 @@ export default function Invoice() {
                         alignItems: "center",
                       }}
                     >
-                      {finalTotal.toFixed(2)}
+                    {(finalTotal ?? 0).toFixed(0)}
                     </div>
 
                     <div
