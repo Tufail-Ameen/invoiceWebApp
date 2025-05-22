@@ -54,14 +54,14 @@ const NevBar = () => {
 
   return (
     <>
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-md-12 p-0 m-0">
+      <div className="container-fluid p-0" style={{border:"2px solid blue"}}>
+        <div className="row m-0">
+          <div className="col-sm-2 col-md-12 col-lg-12 p-0">
             {/* Side Bar */}
             <div className="d-flex flex-column flex-shrink-0 sidebarbg">
-              <div className="w-25">
+              <div className="w-100">
                 <img
-                  className="sidebarimg cursor"
+                  className="img-fluid sidebarimg cursor"
                   onClick={homepage}
                   src={slidebarimg}
                   alt=""
@@ -125,7 +125,7 @@ const NevBar = () => {
                     className="profile w-100"
                     style={{ borderTop: "2px solid #494E6E" }}
                   >
-                    <p className="text-center pt-3">
+                    <p className="img-fluid text-center pt-3">
                       <img
                         src={logout}
                         alt="mdo"

@@ -24,25 +24,15 @@ export default function App() {
 
   return (
     <>
-      <div className='container-fluid p-0'>
-        <div className='d-flex justify-content-start w-100'>
-          <div className=' position-relative' style={{ width: "7%", }}>
-            <div className='position-fixed' style={{ width: "8%", zIndex: "100" }}>
-
-              <NevBar />
-
-            </div>
-          </div>
-
-          <div className=' p-0 m-0' style={{ width: "93%" }}>
-
-            {edit ? <Edit /> : clientcomponent ? <Client /> : usercomponent ? <User /> : homapage ? <Home /> : stock ? <Stock /> : <Home />}
-
-          </div>
-
+      <div className='d-flex'>
+        <div className='sidebar-container'>
+          <NevBar />
         </div>
       </div>
 
+      <div className='content-container flex-grow-1'>
+        {edit ? <Edit /> : clientcomponent ? <Client /> : usercomponent ? <User /> : homapage ? <Home /> : stock ? <Stock /> : <Home />}
+      </div>
     </>
   )
 }

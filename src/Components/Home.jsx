@@ -52,20 +52,20 @@ const Home = () => {
   return (
     <>
       {/* Container */}
-      <div className="container-fluid pageposition">
+      <div className="container-fluid h-auto pageposition" style={{border:"2px solid red"}}>
         {/* Row */}
-        <div className="row pt-5 justify-content-center">
-          <div className="col-md-7">
+        <div className="row pt-5 d-flex justify-content-center">
+          <div className="col-md-8 col-lg-8 p-0">
             {/* Row */}
             <div className="row mt-3">
-              <div className="col-md-3 py-2 p-0">
+              <div className="col-md-3 col-lg-3 py-2 p-0">
                 <h3 className="invoice-text">Invoices</h3>
                 <p className="count-invoices-tect p-0 m-0">
                   There are {product.length} total Invoices
                 </p>
               </div>
-              <div className="col-md-3">{/* Space */}</div>
-              <div className="col-md-3">
+              <div className="col-md-3 col-lg-3">{/* Space */}</div>
+              <div className="col-md-3 col-lg-3">
                 <Dropdown className="py-3 text-end">
                   <Dropdown.Toggle
                     className="btn text-white filter p-0"
@@ -146,7 +146,7 @@ const Home = () => {
                   </Dropdown.Menu>
                 </Dropdown>
               </div>
-              <div className="col-md-3 p-0">
+              <div className="col-md-3 col-lg-3 p-0">
                 <div className="new-invoice-parent">
                   <button
                     type="button"
@@ -169,25 +169,24 @@ const Home = () => {
                   onClick={() => {
                     handeliconclick(index);
                   }}
-                  style={{ cursor: "pointer" }}
                   key={index}
-                  className="row datalist mt-3 py-3 ps-3 py-2 rounded"
+                  className="row mt-3 py-3 ps-3 py-2 rounded datalist"
                 >
-                  <div className="col-md-1 position-table table-text-size">
+                  <div className="col-sm-6 col-md-1 col-lg-1 position-table table-text-size">
                     <span className="hash-clr">#</span>
                     {elem.id}
                   </div>
-                  <div className="col-md-3 position-table table-text-size textcklr">
+                  <div className="col-sm-6 col-md-3 col-lg-3 position-table table-text-size textcklr">
                     {elem.date}
                   </div>
-                  <div className="col-md-3 position-table table-text-size textcklr">
+                  <div className="col-sm-12 col-md-3 col-lg-3  table-text-size textcklr">
                     {elem.name}
                   </div>
-                  <div className="col-md-2 position-table text-end price">
+                  <div className="col-sm-12 col-md-2 col-lg-2 price">
                     {elem.currency}&nbsp;
                     {(elem.total ?? 0).toFixed(0)}
                   </div>
-                  <div className="col-md-2 position-table-btn p-0">
+                  <div className="col-sm-12 col-md-2 col-lg-2 position-table-btn p-0">
                     {elem.btnCP == 1 ? (
                       <button type="button" className="btn draftbtn px-4">
                         <span className="me-1">
@@ -211,7 +210,7 @@ const Home = () => {
                       </button>
                     )}
                   </div>
-                  <div className="col-md-1 p-0 m-0 position-table goicon-position">
+                  <div className="col-sm-12 col-md-1 col-lg-1 p-0 m-0 position-table goicon-position">
                     <span className="down-icon goicon">
                       <FontAwesomeIcon icon={faChevronRight} />
                     </span>

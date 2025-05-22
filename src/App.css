@@ -17,8 +17,6 @@ body {
 
 /* Home Component */
 .pageposition {
-  left: 4.5rem;
-  height: 100vh;
   background-color: #141625;
 }
 
@@ -82,6 +80,7 @@ body {
 
 .datalist {
   background-color: #1e2139;
+  cursor: pointer;
 }
 
 .new-invoice-parent {
@@ -189,9 +188,7 @@ body {
 }
 
 .invoice-setting {
-  width: 100%;
   position: absolute;
-  z-index: 1;
   top: 0px;
   left: 0px;
 }
@@ -489,4 +486,38 @@ td {
 input[type="date"]::-webkit-calendar-picker-indicator {
   filter: invert(1);
   cursor: pointer;
+}
+
+@media (max-width: 576px) {
+body {
+  background-color: red;
+}
+
+.sidebar-container {
+  width: 80px; /* Adjust width for small screens */
+  min-height: 100vh;
+}
+
+  /* .datalist{
+    display: flex;
+    flex-direction: start;
+    justify-content: start;
+  } */
+}
+
+@media (min-width: 1200px) {
+
+}
+
+.sidebar-container {
+  width: 100px;
+  min-height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+}
+
+.content-container {
+  margin-left: 100px;
 }

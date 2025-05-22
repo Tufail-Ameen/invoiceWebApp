@@ -288,30 +288,27 @@ export default function Invoice() {
     >
       {({ values, handleChange, setValues }) => (
         <Form>
-          <div className="invoice-setting p-0">
+          <div className="container-fluid h-auto invoice-setting p-0">
             <div
               className="py-3"
               style={{
                 backgroundColor: "#1E2139",
                 width: "45%",
                 height: "100%",
-                marginLeft: "3%",
                 paddingLeft: "5%",
-                zIndex: "1",
               }}
             >
-              {/* Edit ID */}
-              {/* <div className="row mx-2">
+              {/* ID */}
+              <div className="row mx-2">
                 <div className="col-md-12 edit-text">
                   <span style={{ color: "#7e829b" }}>#</span>
                   {filterdata.length != 0 ? filterdata[0].id : randomId}
                 </div>
-              </div> */}
+              </div>
 
               {/* Bill From */}
               <div className="row mt-3 mx-2">
                 <div className="col-md-12 bill-form">Bill From</div>
-                {/* {formData} */}
               </div>
 
               {/* Street Address */}
@@ -322,7 +319,6 @@ export default function Invoice() {
                       htmlFor="address1"
                       className="input-clr mb-1"
                       onClick={() => {
-                        // console.log(filterdata);
                       }}
                     >
                       Street Address
