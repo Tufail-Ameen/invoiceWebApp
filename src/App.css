@@ -191,6 +191,7 @@ body {
   position: absolute;
   top: 0px;
   left: 0px;
+  margin-left: 2%;
 }
 
 .edit-text {
@@ -488,33 +489,70 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
 }
 
+/* Media Queries */
 @media (max-width: 576px) {
-body {
-  background-color: red;
-}
+  .sidebar-container {
+    display: none;
+  }
 
-.sidebar-container {
-  width: 80px; /* Adjust width for small screens */
-  min-height: 100vh;
-}
-
-  /* .datalist{
+  .mobile-navbar {
     display: flex;
-    flex-direction: start;
-    justify-content: start;
+    flex-direction: column;
+  }
+
+  .sidebarbg {
+    height: 20%;
+    width: 100%;
+    border-radius: 0px 20px 20px 0px;
+    background-color: #373b53;
+    display: flex;
+  }
+
+  .sidebarimg {
+    height: 100%;
+    width: 26%;
+  }
+
+  .add-client {
+    height: 100%;
+    width: 26%;
+  }
+  
+  .add-client:hover {
+    background-color: #9277ff;
+    border: 2px solid #9277ff;
+  }
+
+  .mblView {
+    background-color: red !important ;
+  }
+
+  /* .invoice-setting {
+    position: absolute;
+    top: -1000px;
+    left: 0px;
+    margin-left: 2%;
   } */
-}
-
-@media (min-width: 1200px) {
 
 }
 
+@media (min-width: 576px) {
+  .mobile-navbar {
+    display: none;
+  }
+
+  .sidebar-container {
+    display: block;
+  }
+}
+
+/* App.js / css */
 .sidebar-container {
   width: 100px;
   min-height: 100vh;
   position: fixed;
-  left: 0;
-  top: 0;
+  top: 0px;
+  left: 0px;
   z-index: 1000;
 }
 

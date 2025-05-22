@@ -24,10 +24,12 @@ export default function App() {
 
   return (
     <>
-      <div className='d-flex'>
-        <div className='sidebar-container'>
-          <NevBar />
-        </div>
+      <div className='sidebar-container'>
+        <NevBar />
+      </div>
+
+      <div className="mobile-navbar">
+        <NevBar />
       </div>
 
       <div className='content-container flex-grow-1'>

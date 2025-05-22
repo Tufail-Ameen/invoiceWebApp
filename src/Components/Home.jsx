@@ -22,24 +22,31 @@ import Dropdown from "react-bootstrap/Dropdown";
 import { Form } from "react-bootstrap";
 
 const Home = () => {
-  const [id, setId] = useRecoilState(idsend);
-  const [Invoice1, setNewInvoice1] = useRecoilState(formdisplay);
-  const [edit, setEdit] = useRecoilState(editatom);
-  const [product, setProduct] = useRecoilState(productAtom);
-  const [filterdata2, setFilterdata2] = useRecoilState(filterdatatom);
+  const [product, setProduct] = useRecoilState(productAtom); // main arary
+  const [id, setId] = useRecoilState(idsend); // default []
+  const [Invoice1, setNewInvoice1] = useRecoilState(formdisplay); // default false
+  const [edit, setEdit] = useRecoilState(editatom); // default false
+  const [filterdata, setFilterdata] = useState([]); // default []
 
   const handelFilter = (status) => {
-    console.log(status);
+    console.log(typeof status);
     const pendingData = product.filter((item) => item.btnCP === status);
+    if (status == null || status == undefined) {
+      setFilterdata(product);
+    }
+    setFilterdata(pendingData);
   };
+
+  useEffect(() => {
+    setFilterdata(product);
+  }, [product]);
 
   useEffect(() => {
     let storeData = JSON.parse(localStorage.getItem("invoiceData")) || [];
     setProduct(storeData);
-  }, [])
+  }, []);
 
   const openinvoice = () => {
-    setFilterdata2([]);
     setNewInvoice1(true);
   };
 
@@ -47,12 +54,11 @@ const Home = () => {
     localStorage.setItem("Index", index);
     setEdit(true);
   };
-  
 
   return (
     <>
       {/* Container */}
-      <div className="container-fluid h-auto pageposition" style={{border:"2px solid red"}}>
+      <div className="container-fluid h-auto pageposition">
         {/* Row */}
         <div className="row pt-5 d-flex justify-content-center">
           <div className="col-md-8 col-lg-8 p-0">
@@ -163,7 +169,7 @@ const Home = () => {
               </div>
             </div>
             {/* Row 1 */}
-            {product.map((elem, index) => {
+            {filterdata.map((elem, index) => {
               return (
                 <div
                   onClick={() => {

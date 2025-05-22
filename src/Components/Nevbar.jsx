@@ -54,38 +54,39 @@ const NevBar = () => {
 
   return (
     <>
-      <div className="container-fluid p-0" style={{border:"2px solid blue"}}>
-        <div className="row m-0">
-          <div className="col-sm-2 col-md-12 col-lg-12 p-0">
-            {/* Side Bar */}
-            <div className="d-flex flex-column flex-shrink-0 sidebarbg">
-              <div className="w-100">
-                <img
-                  className="img-fluid sidebarimg cursor"
-                  onClick={homepage}
-                  src={slidebarimg}
-                  alt=""
-                />
-              </div>
-
-              {/* Add Client btn */}
-              <div
-                type="button"
-                className="add-client py-2 m-1"
-                style={{ border: "2px solid #7c5dfa" }}
-                onClick={addclient}
-              >
-                <div className="">
-                  <FontAwesomeIcon
-                    icon={faCirclePlus}
-                    style={{ color: "#ffffff", fontSize: "30px" }}
+      <nav>
+        <div className="container-fluid p-0">
+          <div className="row m-0">
+            <div className="col-sm-12 col-md-12 col-lg-12 p-0 mbl">
+              {/* Side Bar */}
+              <div className="sidebarbg">
+                <div className="w-100">
+                  <img
+                    className="img-fluid sidebarimg cursor"
+                    onClick={homepage}
+                    src={slidebarimg}
+                    alt=""
                   />
                 </div>
-                <div className="">Add Client</div>
-              </div>
 
-              {/* Add User btn */}
-              {/* <div
+                {/* Add Client btn */}
+                <div
+                  type="button"
+                  className="add-client py-2 m-1"
+                  style={{ border: "2px solid #7c5dfa" }}
+                  onClick={addclient}
+                >
+                  <div className="">
+                    <FontAwesomeIcon
+                      icon={faCirclePlus}
+                      style={{ color: "#ffffff", fontSize: "30px" }}
+                    />
+                  </div>
+                  <div className="">Add Client</div>
+                </div>
+
+                {/* Add User btn */}
+                {/* <div
                 type="button"
                 className="add-client py-2 m-1"
                 style={{ border: "2px solid #7c5dfa" }}
@@ -100,8 +101,8 @@ const NevBar = () => {
                 <div className="">Add User</div>
               </div> */}
 
-              {/* Add Stock btn */}
-              {/* <div
+                {/* Add Stock btn */}
+                {/* <div
                 type="button"
                 className="add-client py-2 m-1"
                 style={{ border: "2px solid #7c5dfa" }}
@@ -116,29 +117,30 @@ const NevBar = () => {
                 <div className="">Add Stock</div>
               </div> */}
 
-              <div className="dropdown">
-                <div
-                  className="d-flex align-items-center justify-content-center text-decoration-none"
-                  style={{ height: "67vh" }}
-                >
+                <div className="dropdown">
                   <div
-                    className="profile w-100"
-                    style={{ borderTop: "2px solid #494E6E" }}
+                    className="d-flex align-items-center justify-content-center text-decoration-none profileMobile"
+                    style={{ height: "67vh" }}
                   >
-                    <p className="img-fluid text-center pt-3">
-                      <img
-                        src={logout}
-                        alt="mdo"
-                        className="rounded-circle profile-picture"
-                      />
-                    </p>
+                    <div
+                      className="profile w-100"
+                      style={{ borderTop: "2px solid #494E6E" }}
+                    >
+                      <p className="img-fluid text-center pt-3">
+                        <img
+                          src={logout}
+                          alt="mdo"
+                          className="rounded-circle profile-picture"
+                        />
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </nav>
     </>
   );
 };
