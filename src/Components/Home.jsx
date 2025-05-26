@@ -60,7 +60,7 @@ const Home = () => {
       {/* Container */}
       <div className="container-fluid h-auto pageposition border">
         {/* Row */}
-        <div className="row pt-5 d-flex justify-content-center">
+        <div className="row pt-5 d-flex justify-content-center" style={{backgroundColor:"red"}}>
           <div className="col-md-8 col-lg-8 p-0">
             {/* Row */}
             <div className="row mt-3">
