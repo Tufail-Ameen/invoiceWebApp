@@ -10,8 +10,6 @@ import { clientopenAtom, editatom, gobackatom, gohome, gostock, useropenAtom } f
 import Client from './Components/Client';
 import User from './Components/User';
 import Stock from './Stock';
-// import Invoice from './Components/Invoice';
-
 
 export default function App() {
 
