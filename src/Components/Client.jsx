@@ -10,8 +10,6 @@ import "sweetalert2/dist/sweetalert2.min.css";
 import { useRecoilState } from "recoil";
 import { printclientdata } from "../State/Atom";
 import axios from "axios";
-// import { Link } from "react-router-dom";
-// import { useNavigate } from "react-router-dom";
 
 export default function Client() {
   let [formData, setFormData] = useRecoilState(printclientdata); //map client data (Recoil use here)
@@ -126,25 +124,20 @@ export default function Client() {
         >
           {({ values, handleChange, handleSubmit }) => (
             <Form>
-              {/* Form Start here */}
-              {/* container */}
               <div className="container-fluid">
                 {/* Row 1 */}
                 <div className="row mt-3 pt-5 justify-content-center">
-                  <div
-                    className="col-7 p-3 rounded"
-                    // style={{ backgroundColor: "" }}
-                  >
+                  <div className=" col-12 col-sm-12 col-md-8 p-3 rounded">
                     {/* Add New Client Heading */}
                     <div className="row">
-                      <div className="col-md-12 add-new-client mt-2 mb-3 input-clr">
+                      <div className="col-12 add-new-client mt-2 mb-3 input-clr">
                         Add New Client
                       </div>
                     </div>
 
+                    {/* Client Name / Email */}
                     <div className="row">
-                      {/* Client Name */}
-                      <div className="col-6">
+                      <div className="col-12 col-sm-12 col-md-6">
                         <div>
                           <label
                             htmlFor="name"
@@ -167,8 +160,7 @@ export default function Client() {
                         />
                       </div>
 
-                      {/* Email Input */}
-                      <div className="col-6">
+                      <div className="col-12 col-sm-12 col-md-6">
                         <div className="">
                           <label
                             htmlFor="Email"
@@ -192,9 +184,9 @@ export default function Client() {
                       </div>
                     </div>
 
+                    {/* Street Address / City */}
                     <div className="row">
-                      {/* Street Address */}
-                      <div className="col-6">
+                      <div className="col-12 col-sm-12 col-md-6">
                         <div className="">
                           <label
                             htmlFor="Address"
@@ -217,8 +209,7 @@ export default function Client() {
                         />
                       </div>
 
-                      {/* Select City */}
-                      <div className="col-6">
+                      <div className="col-12 col-sm-12 col-md-6">
                         <label htmlFor="City" className="form-label input-clr">
                           City:
                         </label>
@@ -238,9 +229,9 @@ export default function Client() {
                       </div>
                     </div>
 
+                    {/* Post Code / Country */}
                     <div className="row">
-                      {/* Post Code */}
-                      <div className="col-6">
+                      <div className="col-12 col-sm-12 col-md-6">
                         <div className="mb-3">
                           <label
                             htmlFor="exampleFormControlTextarea1"
@@ -263,8 +254,7 @@ export default function Client() {
                         </div>
                       </div>
 
-                      {/* Select Country */}
-                      <div className="col-6">
+                      <div className="col-12 col-sm-12 col-md-6">
                         <label
                           htmlFor="Country"
                           className="form-label input-clr"
@@ -624,12 +614,15 @@ export default function Client() {
                       </div>
                     </div>
 
+                    {/* Submit Button */}
                     <div className="row">
-                      {/* Submit Button */}
-                      <div className="col-6">
+                      <div className="col-12 col-sm-12 col-md-6">
                         <button
                           type="submit"
-                          className="btn input-clr1 save-changes py-2"
+                          className="btn input-clr1 save-changes py-2 mt-3 mt-md-0 btn-responsive-width"
+                          style={{
+                            minHeight: '48px'
+                          }}
                         >
                           {ButtonUpdate || "Submit"}
                         </button>
@@ -640,68 +633,137 @@ export default function Client() {
 
                 {/* Row 2 */}
                 <div className="row justify-content-center">
-                  <div className="col-md-11 m-0 p-0">
-                    {/* Show data in table */}
-                    <table id="table" className="table table-striped p-3">
-                      <thead>
-                        <tr head-settings>
-                          <th scope="col" className="head-settings">
-                            #
-                          </th>
-                          <th scope="col" className="head-settings">
-                            Name
-                          </th>
-                          <th scope="col" className="head-settings">
-                            Email
-                          </th>
-                          <th scope="col" className="head-settings">
-                            Address
-                          </th>
-                          <th scope="col" className="head-settings">
-                            City
-                          </th>
-                          <th scope="col" className="head-settings">
-                            Post Code
-                          </th>
-                          <th scope="col" className="head-settings">
-                            Country
-                          </th>
-                          <th scope="col" className="head-settings">
-                            Options
-                          </th>
-                        </tr>
-                      </thead>
-
-                      <tbody>
-                        {formData.map((elem, index) => (
-                          <tr key={index}>
-                            <td className="body-settings">{index + 1}</td>
-                            <td className="body-settings">{elem.name}</td>
-                            <td className="body-settings"> {elem.email}</td>
-                            <td className="body-settings"> {elem.address}</td>
-                            <td className="body-settings"> {elem.city}</td>
-                            <td className="body-settings"> {elem.code}</td>
-                            <td className="body-settings"> {elem.country}</td>
-                            <td className="body-settings">
-                              <button
-                                onClick={() => handeldeletebtn(index)}
-                                type="button"
-                                className="btn btn-danger mx-2"
-                              >
-                                Delete
-                              </button>
-                              <button
-                                onClick={() => handeleditbtn(index)}
-                                type="button"
-                                className="btn btn-warning"
-                              >
-                                Edit
-                              </button>
-                            </td>
+                  <div className="col-12 col-sm-12 col-md-11 m-0 p-0">
+                    {/* Desktop Table View - Hidden on small screens */}
+                    <div className="d-none d-md-block">
+                      <table id="table" className="table table-striped p-3">
+                        <thead>
+                          <tr className="head-settings">
+                            <th scope="col" className="head-settings">
+                              #
+                            </th>
+                            <th scope="col" className="head-settings">
+                              Name
+                            </th>
+                            <th scope="col" className="head-settings">
+                              Email
+                            </th>
+                            <th scope="col" className="head-settings">
+                              Address
+                            </th>
+                            <th scope="col" className="head-settings">
+                              City
+                            </th>
+                            <th scope="col" className="head-settings">
+                              Post Code
+                            </th>
+                            <th scope="col" className="head-settings">
+                              Country
+                            </th>
+                            <th scope="col" className="head-settings">
+                              Options
+                            </th>
                           </tr>
-                        ))}
-                      </tbody>
-                    </table>
+                        </thead>
+                        <tbody>
+                          {formData.map((elem, index) => (
+                            <tr key={index}>
+                              <td className="body-settings">{index + 1}</td>
+                              <td className="body-settings">{elem.name}</td>
+                              <td className="body-settings">{elem.email}</td>
+                              <td className="body-settings">{elem.address}</td>
+                              <td className="body-settings">{elem.city}</td>
+                              <td className="body-settings">{elem.code}</td>
+                              <td className="body-settings">{elem.country}</td>
+                              <td className="body-settings">
+                                <button
+                                  onClick={() => handeleditbtn(index)}
+                                  type="button"
+                                  className="btn btn-warning mx-2"
+                                >
+                                  Edit
+                                </button>
+                                <button
+                                  onClick={() => handeldeletebtn(index)}
+                                  type="button"
+                                  className="btn btn-danger"
+                                >
+                                  Delete
+                                </button>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+
+                    {/* Mobile Card View - Hidden on large screens */}
+                    <div className="d-block d-md-none">
+                      {formData.map((item, index) => (
+                        <div key={index} className="card mb-3" style={{
+                          backgroundColor: '#1e2139',
+                          border: '1px solid #373b53',
+                          borderRadius: '12px'
+                        }}>
+                          <div className="card-body p-3">
+                            <div className="row">
+                              <div className="col-12 mb-2">
+                                <strong style={{ color: '#7c5dfa' }}>Name:</strong>
+                                <span className="ms-2" style={{ color: '#ffffff' }}>{item.name}</span>
+                              </div>
+                              <div className="col-12 mb-2">
+                                <strong style={{ color: '#7c5dfa' }}>Email:</strong>
+                                <span className="ms-2" style={{ color: '#ffffff' }}>{item.email}</span>
+                              </div>
+                              <div className="col-12 mb-2">
+                                <strong style={{ color: '#7c5dfa' }}>Address:</strong>
+                                <span className="ms-2" style={{ color: '#ffffff' }}>{item.address}</span>
+                              </div>
+                              <div className="col-6 mb-2">
+                                <strong style={{ color: '#7c5dfa' }}>City:</strong>
+                                <span className="ms-2" style={{ color: '#ffffff' }}>{item.city}</span>
+                              </div>
+                              <div className="col-6 mb-2">
+                                <strong style={{ color: '#7c5dfa' }}>Code:</strong>
+                                <span className="ms-2" style={{ color: '#ffffff' }}>{item.code}</span>
+                              </div>
+                              <div className="col-12 mb-3">
+                                <strong style={{ color: '#7c5dfa' }}>Country:</strong>
+                                <span className="ms-2" style={{ color: '#ffffff' }}>{item.country}</span>
+                              </div>
+                              <div className="col-12">
+                                <div className="d-flex gap-2">
+                                  <button
+                                    type="button"
+                                    className="btn edit flex-fill"
+                                    onClick={() => handeleditbtn(index)}
+                                    style={{
+                                      minHeight: '44px',
+                                      fontSize: '14px',
+                                      fontWeight: '500'
+                                    }}
+                                  >
+                                    Edit
+                                  </button>
+                                  <button
+                                    type="button"
+                                    className="btn delete flex-fill"
+                                    onClick={() => handeldeletebtn(index)}
+                                    style={{
+                                      minHeight: '44px',
+                                      fontSize: '14px',
+                                      fontWeight: '500'
+                                    }}
+                                  >
+                                    Delete
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -718,7 +780,6 @@ export default function Client() {
           pauseOnFocusLoss
           draggable
           pauseOnHover
-          // theme="colored"
         />
       </div>
     </>

@@ -190,8 +190,8 @@ body {
 .invoice-setting {
   position: absolute;
   top: 0px;
-  left: 0px;
-  margin-left: 2%;
+  /* left: 130px; */
+  /* margin-left: 2%; */
 }
 
 .edit-text {
@@ -510,30 +510,22 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
   .sidebarimg {
     height: 100%;
-    width: 26%;
+    width: 100%;
   }
 
   .add-client {
     height: 100%;
     width: 26%;
   }
-  
+
   .add-client:hover {
     background-color: #9277ff;
     border: 2px solid #9277ff;
   }
 
   .mblView {
-    background-color: red !important ;
+    background-color: red !important;
   }
-
-  /* .invoice-setting {
-    position: absolute;
-    top: -1000px;
-    left: 0px;
-    margin-left: 2%;
-  } */
-
 }
 
 @media (min-width: 576px) {
@@ -558,4 +550,17 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .content-container {
   margin-left: 100px;
+}
+
+/* Responsive button width */
+@media (min-width: 768px) {
+  .btn-responsive-width {
+    width: auto !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .btn-responsive-width {
+    width: 100% !important;
+  }
 }

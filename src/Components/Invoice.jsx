@@ -17,7 +17,7 @@ import { parse } from "date-fns";
 import { useEffect } from "react";
 
 export default function Invoice() {
-  const [data1, setData1] = useState([{id:0}]);
+  const [data1, setData1] = useState([{ id: 0 }]);
   const [product, setProduct] = useRecoilState(productAtom);
   const [Invoice1, setNewInvoice1] = useRecoilState(formdisplay);
   const [id, setId] = useRecoilState(idsend);
@@ -295,7 +295,7 @@ export default function Invoice() {
                 backgroundColor: "#1E2139",
                 width: "45%",
                 height: "100%",
-                paddingLeft: "5%",
+                // paddingLeft: "5%",
               }}
             >
               {/* ID */}
@@ -760,7 +760,7 @@ export default function Invoice() {
                         alignItems: "center",
                       }}
                     >
-                    {(finalTotal ?? 0).toFixed(0)}
+                      {(finalTotal ?? 0).toFixed(0)}
                     </div>
 
                     <div

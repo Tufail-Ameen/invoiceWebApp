@@ -169,61 +169,135 @@ const Home = () => {
               </div>
             </div>
             {/* Row 1 */}
-            {filterdata.map((elem, index) => {
-              return (
+            {/* Desktop Table View - Hidden on small screens */}
+            <div className="d-none d-md-block">
+              {filterdata.map((elem, index) => {
+                return (
+                  <div
+                    onClick={() => {
+                      handeliconclick(index);
+                    }}
+                    key={index}
+                    className="row mt-3 py-3 ps-3 py-2 rounded datalist"
+                  >
+                    <div className="col-sm-6 col-md-1 col-lg-1 position-table table-text-size">
+                      <span className="hash-clr">#</span>
+                      {elem.id}
+                    </div>
+                    <div className="col-sm-6 col-md-3 col-lg-3 position-table table-text-size textcklr">
+                      {elem.date}
+                    </div>
+                    <div className="col-sm-12 col-md-3 col-lg-3  table-text-size textcklr">
+                      {elem.name}
+                    </div>
+                    <div className="col-sm-12 col-md-2 col-lg-2 price">
+                      {elem.currency}&nbsp;
+                      {(elem.total ?? 0).toFixed(0)}
+                    </div>
+                    <div className="col-sm-12 col-md-2 col-lg-2 position-table-btn p-0">
+                      {elem.btnCP == 1 ? (
+                        <button type="button" className="btn draftbtn px-4">
+                          <span className="me-1">
+                            <FontAwesomeIcon icon={faCircle} size="2xs" />
+                          </span>
+                          <label>Draft</label>
+                        </button>
+                      ) : elem.btnCP == 2 ? (
+                        <button type="button" className="btn pendingbtn px-4">
+                          <span className="me-1">
+                            <FontAwesomeIcon icon={faCircle} size="2xs" />
+                          </span>
+                          <label className="pending"> Pending</label>
+                        </button>
+                      ) : (
+                        <button type="button" className="btn paidbtn px-4">
+                          <span className="me-1">
+                            <FontAwesomeIcon icon={faCircle} size="2xs" />
+                          </span>
+                          <label>Paid</label>
+                        </button>
+                      )}
+                    </div>
+                    <div className="col-sm-12 col-md-1 col-lg-1 p-0 m-0 position-table goicon-position">
+                      <span className="down-icon goicon">
+                        <FontAwesomeIcon icon={faChevronRight} />
+                      </span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Mobile Card View - Hidden on large screens */}
+            <div className="d-block d-md-none m-2">
+              {filterdata.map((elem, index) => (
                 <div
+                  key={index}
+                  className="card mb-3 cursor"
+                  style={{
+                    backgroundColor: '#1e2139',
+                    border: '1px solid #373b53',
+                    borderRadius: '12px'
+                  }}
                   onClick={() => {
                     handeliconclick(index);
                   }}
-                  key={index}
-                  className="row mt-3 py-3 ps-3 py-2 rounded datalist"
                 >
-                  <div className="col-sm-6 col-md-1 col-lg-1 position-table table-text-size">
-                    <span className="hash-clr">#</span>
-                    {elem.id}
-                  </div>
-                  <div className="col-sm-6 col-md-3 col-lg-3 position-table table-text-size textcklr">
-                    {elem.date}
-                  </div>
-                  <div className="col-sm-12 col-md-3 col-lg-3  table-text-size textcklr">
-                    {elem.name}
-                  </div>
-                  <div className="col-sm-12 col-md-2 col-lg-2 price">
-                    {elem.currency}&nbsp;
-                    {(elem.total ?? 0).toFixed(0)}
-                  </div>
-                  <div className="col-sm-12 col-md-2 col-lg-2 position-table-btn p-0">
-                    {elem.btnCP == 1 ? (
-                      <button type="button" className="btn draftbtn px-4">
-                        <span className="me-1">
-                          <FontAwesomeIcon icon={faCircle} size="2xs" />
+                  <div className="card-body p-3">
+                    <div className="row">
+                      <div className="col-12 mb-2 d-flex justify-content-between align-items-center">
+                        <div>
+                          <span className="hash-clr" style={{ fontSize: '16px', fontWeight: '600' }}>#{elem.id}</span>
+                        </div>
+                        <div className="text-end">
+                          {elem.btnCP == 1 ? (
+                            <button type="button" className="btn draftbtn px-3 py-1" style={{ fontSize: '12px' }}>
+                              <span className="me-1">
+                                <FontAwesomeIcon icon={faCircle} size="2xs" />
+                              </span>
+                              <label>Draft</label>
+                            </button>
+                          ) : elem.btnCP == 2 ? (
+                            <button type="button" className="btn pendingbtn px-3 py-1" style={{ fontSize: '12px' }}>
+                              <span className="me-1">
+                                <FontAwesomeIcon icon={faCircle} size="2xs" />
+                              </span>
+                              <label className="pending">Pending</label>
+                            </button>
+                          ) : (
+                            <button type="button" className="btn paidbtn px-3 py-1" style={{ fontSize: '12px' }}>
+                              <span className="me-1">
+                                <FontAwesomeIcon icon={faCircle} size="2xs" />
+                              </span>
+                              <label>Paid</label>
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                      <div className="col-12 mb-2">
+                        <strong style={{ color: '#7c5dfa' }}>Client:</strong>
+                        <span className="ms-2" style={{ color: '#ffffff' }}>{elem.name}</span>
+                      </div>
+                      <div className="col-6 mb-2">
+                        <strong style={{ color: '#7c5dfa' }}>Date:</strong>
+                        <span className="ms-2" style={{ color: '#ffffff' }}>{elem.date}</span>
+                      </div>
+                      <div className="col-6 mb-2">
+                        <strong style={{ color: '#7c5dfa' }}>Amount:</strong>
+                        <span className="ms-2" style={{ color: '#ffffff', fontWeight: '600' }}>
+                          {elem.currency} {(elem.total ?? 0).toFixed(0)}
                         </span>
-                        <label>Draft</label>
-                      </button>
-                    ) : elem.btnCP == 2 ? (
-                      <button type="button" className="btn pendingbtn px-4">
-                        <span className="me-1">
-                          <FontAwesomeIcon icon={faCircle} size="2xs" />
+                      </div>
+                      <div className="col-12 text-end">
+                        <span className="down-icon goicon">
+                          <FontAwesomeIcon icon={faChevronRight} />
                         </span>
-                        <label className="pending"> Pending</label>
-                      </button>
-                    ) : (
-                      <button type="button" className="btn paidbtn px-4">
-                        <span className="me-1">
-                          <FontAwesomeIcon icon={faCircle} size="2xs" />
-                        </span>
-                        <label>Paid</label>
-                      </button>
-                    )}
-                  </div>
-                  <div className="col-sm-12 col-md-1 col-lg-1 p-0 m-0 position-table goicon-position">
-                    <span className="down-icon goicon">
-                      <FontAwesomeIcon icon={faChevronRight} />
-                    </span>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              );
-            })}
+              ))}
+            </div>
           </div>
         </div>
       </div>

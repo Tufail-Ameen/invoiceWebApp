@@ -10,6 +10,7 @@ import { clientopenAtom, editatom, gobackatom, gohome, gostock, useropenAtom } f
 import Client from './Components/Client';
 import User from './Components/User';
 import Stock from './Stock';
+import DashboardLayout from './Layouts/Dashboardlayout';
 
 export default function App() {
 
@@ -22,7 +23,8 @@ export default function App() {
 
   return (
     <>
-      <div className='sidebar-container'>
+      <DashboardLayout />
+      {/* <div className='sidebar-container'>
         <NevBar />
       </div>
 
@@ -32,7 +34,7 @@ export default function App() {
 
       <div className='content-container flex-grow-1'>
         {edit ? <Edit /> : clientcomponent ? <Client /> : usercomponent ? <User /> : homapage ? <Home /> : stock ? <Stock /> : <Home />}
-      </div>
+      </div> */}
     </>
   )
 }
