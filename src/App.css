@@ -564,3 +564,23 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     width: 100% !important;
   }
 }
+
+@media (max-width: 577px) {
+  .new-invoice-parent {
+    display: flex;
+    justify-content: left !important;
+  }
+}
+
+/* Responsive margin for Home component */
+@media (min-width: 768px) {
+  .home-responsive-margin {
+    margin: 1rem !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .home-responsive-margin {
+    margin: 0 !important;
+  }
+}

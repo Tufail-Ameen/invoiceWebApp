@@ -61,12 +61,12 @@ const NevBar = () => {
               {/* Side Bar */}
               <div className="sidebarbg">
                 <div className="w-100">
-                  <img 
-                    className="img-fluid sidebarimg cursor w-100" 
-                    onClick={homepage} 
-                    src={slidebarimg} 
+                  <img
+                    className="img-fluid sidebarimg cursor w-100"
+                    onClick={homepage}
+                    src={slidebarimg}
                     alt=""
-                    style={{ 
+                    style={{
                       width: '100%',
                       height: 'auto',
                       objectFit: 'cover'

@@ -60,18 +60,18 @@ const Home = () => {
       {/* Container */}
       <div className="container-fluid h-auto pageposition">
         {/* Row */}
-        <div className="row pt-5 d-flex justify-content-center">
+        <div className="row pt-1 pt-md-5 d-flex justify-content-center">
           <div className="col-md-8 col-lg-8 p-0">
             {/* Row */}
-            <div className="row mt-3">
-              <div className="col-md-3 col-lg-3 py-2 p-0">
+            <div className="row mt-3 m-2 m-sm-2 m-md-auto m-lg-auto">
+              <div className="col-6 col-sm-4 col-md-3 col-lg-3 py-2 p-0">
                 <h3 className="invoice-text">Invoices</h3>
                 <p className="count-invoices-tect p-0 m-0">
                   There are {product.length} total Invoices
                 </p>
               </div>
-              <div className="col-md-3 col-lg-3">{/* Space */}</div>
-              <div className="col-md-3 col-lg-3">
+
+              <div className="col-6 col-sm-4 col-md-3 col-lg-3">
                 <Dropdown className="py-3 text-end">
                   <Dropdown.Toggle
                     className="btn text-white filter p-0"
@@ -152,7 +152,11 @@ const Home = () => {
                   </Dropdown.Menu>
                 </Dropdown>
               </div>
-              <div className="col-md-3 col-lg-3 p-0">
+
+              {/* Space column - Hidden on small screens, 3rd position on medium+ */}
+              <div className="d-none d-md-block col-md-3 col-lg-3">{/* Space */}</div>
+
+              <div className="col-6 col-sm-4 col-md-3 col-lg-3 p-0">
                 <div className="new-invoice-parent">
                   <button
                     type="button"
@@ -168,6 +172,7 @@ const Home = () => {
                 </div>
               </div>
             </div>
+
             {/* Row 1 */}
             {/* Desktop Table View - Hidden on small screens */}
             <div className="d-none d-md-block">
