@@ -71,6 +71,9 @@ const Home = () => {
                 </p>
               </div>
 
+              {/* Space column - Hidden on small screens, 3rd position on medium+ */}
+              <div className="d-none d-md-block col-md-3 col-lg-3">{/* Space */}</div>
+              
               <div className="col-6 col-sm-4 col-md-3 col-lg-3">
                 <Dropdown className="py-3 text-end">
                   <Dropdown.Toggle
@@ -153,8 +156,6 @@ const Home = () => {
                 </Dropdown>
               </div>
 
-              {/* Space column - Hidden on small screens, 3rd position on medium+ */}
-              <div className="d-none d-md-block col-md-3 col-lg-3">{/* Space */}</div>
 
               <div className="col-6 col-sm-4 col-md-3 col-lg-3 p-0">
                 <div className="new-invoice-parent">

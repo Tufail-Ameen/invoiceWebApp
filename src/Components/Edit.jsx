@@ -37,7 +37,7 @@ export default function Edit() {
     );
     setProduct(filteredProduct);
     setEdit(false);
-    localStorage.setItem("invoiceData" , JSON.stringify(filteredProduct));
+    localStorage.setItem("invoiceData", JSON.stringify(filteredProduct));
   };
 
   const updatehandler = () => {
@@ -98,10 +98,10 @@ export default function Edit() {
     <>
       <div className="container-fluid pageposition invoice-setting">
         {/* Row */}
-        <div className="row pt-5 justify-content-center">
-          <div className="col-md-7">
+        <div className="row pt-5 justify-content-center m-1 m-sm-1 m-md-auto">
+          <div className="col-md-7 border">
             {/* New Row Go Back */}
-            <div className="row">
+            <div className="row border">
               <div className="col-md-12 p-0">
                 <span style={{ cursor: "pointer" }} onClick={handelgoback}>
                   <span className="me-3">
